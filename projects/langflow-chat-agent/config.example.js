@@ -1,0 +1,2 @@
+const LANGFLOW_API_KEY = "YOUR_LANGFLOW_API_KEY";
+const LANGFLOW_HOST_URL = "http://localhost:7860";

@@ -1,0 +1,132 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Testcase Generator Chat</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/gh/langflow-ai/langflow-embedded-chat@main/dist/build/static/js/bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="page-shell">
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">Testcase Generator</p>
+                <h1>Langflow Chat for Banking, Finance & Insurance</h1>
+                <p class="lead">Select a sample story, refine the prompt, then paste it into the embedded Langflow chat to generate structured testcases. Export results to Excel from the generated JSON output.</p>
+            </div>
+            <label class="theme-switch">
+                <input id="themeToggle" type="checkbox" />
+                <span>Dark mode</span>
+            </label>
+        </header>
+
+        <section class="usage-grid">
+            <div class="usage-card">
+                <span class="usage-step">1</span>
+                <div>
+                    <p class="usage-title">Choose a story</p>
+                    <p class="usage-copy">Click a Banking, Finance, or Insurance sample to load a prompt.</p>
+                </div>
+            </div>
+            <div class="usage-card">
+                <span class="usage-step">2</span>
+                <div>
+                    <p class="usage-title">Copy or edit</p>
+                    <p class="usage-copy">Adjust the prompt as needed, then copy it into the chat widget.</p>
+                </div>
+            </div>
+            <div class="usage-card">
+                <span class="usage-step">3</span>
+                <div>
+                    <p class="usage-title">Export Excel</p>
+                    <p class="usage-copy">Paste JSON output from Langflow, scan it, and export to Excel.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="story-grid">
+            <article class="story-card">
+                <div class="story-card-head">
+                    <p class="story-label">Banking</p>
+                    <h2>Account and security</h2>
+                </div>
+                <ul class="story-items">
+                    <li data-prompt="As a customer, I want to transfer funds between my own accounts so that I can manage my money without visiting a branch.">Transfer funds between accounts</li>
+                    <li data-prompt="As a customer, I want to reset my online banking password via OTP so that I can regain access securely.">Reset online banking password via OTP</li>
+                    <li data-prompt="As a bank teller, I want to view a customer's transaction history so that I can resolve disputes quickly.">View transaction history</li>
+                </ul>
+            </article>
+
+            <article class="story-card">
+                <div class="story-card-head">
+                    <p class="story-label">Finance</p>
+                    <h2>Investments and reporting</h2>
+                </div>
+                <ul class="story-items">
+                    <li data-prompt="As an investor, I want to view real-time stock portfolio performance so that I can make informed trading decisions.">View portfolio performance</li>
+                    <li data-prompt="As a user, I want to set up automated monthly SIP investments so that I can build wealth systematically.">Set up automated SIP investments</li>
+                    <li data-prompt="As a finance manager, I want to generate a quarterly expense report so that I can track budget variance.">Generate quarterly expense report</li>
+                </ul>
+            </article>
+
+            <article class="story-card">
+                <div class="story-card-head">
+                    <p class="story-label">Insurance</p>
+                    <h2>Claims and policy</h2>
+                </div>
+                <ul class="story-items">
+                    <li data-prompt="As a policyholder, I want to file a claim online with photo evidence so that I can get faster claim processing.">File online claim with photo</li>
+                    <li data-prompt="As an agent, I want to calculate premium quotes based on a customer's risk profile so that I can offer accurate pricing.">Calculate premium quotes</li>
+                    <li data-prompt="As a customer, I want to renew my policy online before expiry so that I maintain continuous coverage.">Renew my insurance policy</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="workspace-grid">
+            <div class="prompt-panel">
+                <div class="panel-header">
+                    <p class="panel-label">Prompt editor</p>
+                    <h2>Prepare your story prompt</h2>
+                </div>
+                <p class="panel-copy">Click a sample story to load a starter prompt. Copy it manually into the Langflow chat input and generate testcases. No automatic injection occurs.</p>
+                <textarea id="promptInput" rows="6" placeholder="Select a sample story or write your own prompt..."></textarea>
+                <div class="panel-actions">
+                    <button id="copyPrompt" class="button-primary">Copy Prompt</button>
+                    <button id="focusChat" class="button-secondary">Focus Chat</button>
+                </div>
+            </div>
+
+            <div class="chat-panel">
+                <div class="panel-header">
+                    <p class="panel-label">Langflow chat</p>
+                    <h2>Generate testcases</h2>
+                </div>
+                <div class="chat-wrapper" id="chatWrapper">
+                    <!-- Langflow chat widget is created dynamically in app.js -->
+                </div>
+            </div>
+        </section>
+
+        <section class="export-panel">
+            <div class="panel-header">
+                <p class="panel-label">Export</p>
+                <h2>Excel-ready output</h2>
+            </div>
+            <p class="panel-copy">Paste the generated testcase JSON from the chat below and scan it. Then export the cleaned testcases to Excel.</p>
+            <textarea id="rawJsonInput" rows="6" placeholder="Paste generated JSON from the chat here..."></textarea>
+            <div class="panel-actions panel-actions--export">
+                <button id="scanChatBtn" class="button-primary">Scan chat output</button>
+                <button id="exportBtn" class="button-primary" disabled>Export to Excel</button>
+            </div>
+            <div id="exportStatus" class="export-status">Ready to scan generated testcases.</div>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

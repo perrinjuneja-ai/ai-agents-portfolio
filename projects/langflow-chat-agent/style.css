@@ -1,0 +1,549 @@
+:root {
+  --bg: #020617;
+  --panel: rgba(15, 23, 42, 0.96);
+  min-height: 840px; /* increase panel height so embedded widget fits without trimming */
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --accent: #60a5fa;
+  --accent-strong: #38bdf8;
+  --border: rgba(148, 163, 184, 0.22);
+  --shadow: 0 30px 90px rgba(0, 0, 0, 0.25);
+  --surface-overlay: rgba(255, 255, 255, 0.06);
+  --surface-border: rgba(255, 255, 255, 0.08);
+  --control-bg: rgba(255, 255, 255, 0.08);
+}
+
+/* Light theme variable overrides when body is not dark */
+body.light,
+body:not(.dark) {
+  --bg: #f8fafc;
+  --panel: #ffffff;
+  --panel-soft: #f6f8fb;
+  --text: #0f172a;
+  --muted: #6b7280;
+  --accent: #2563eb;
+  --accent-strong: #1d4ed8;
+  --border: rgba(15, 23, 42, 0.06);
+  --shadow: 0 12px 30px rgba(2, 6, 23, 0.06);
+  --surface-overlay: rgba(2,6,23,0.04);
+  --surface-border: rgba(2,6,23,0.06);
+  overflow: hidden; /* keep widget contained inside the panel */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: radial-gradient(circle at top, rgba(96, 165, 250, 0.14), transparent 30%), var(--bg);
+  color: var(--text);
+}
+
+button,
+textarea {
+  font: inherit;
+}
+
+.page-shell {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 32px 24px 56px;
+}
+
+.page-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 22px;
+  align-items: start;
+  margin-bottom: 32px;
+}
+
+.usage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.usage-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px;
+  border-radius: 22px;
+  background: var(--surface-overlay);
+  border: 1px solid var(--surface-border);
+}
+
+.usage-step {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: var(--text);
+  font-weight: 700;
+}
+
+.usage-title {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.usage-copy {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 2.7vw, 3rem);
+  line-height: 1.05;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.lead {
+  margin: 18px 0 0;
+  max-width: 720px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.theme-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: 999px;
+  background: var(--surface-overlay);
+  border: 1px solid var(--surface-border);
+  cursor: pointer;
+}
+
+.theme-switch input {
+  appearance: none;
+  width: 44px;
+  height: 24px;
+  border-radius: 999px;
+  border: 1px solid var(--surface-border);
+  background: var(--control-bg);
+  position: relative;
+  outline: none;
+  cursor: pointer;
+}
+
+.theme-switch input::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--text);
+  transition: transform 180ms ease;
+}
+
+.theme-switch input:checked {
+  background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+}
+
+.theme-switch input:checked::after {
+  transform: translateX(20px);
+}
+
+.story-grid,
+.workspace-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.story-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 32px;
+}
+
+.story-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+.story-card-head {
+  margin-bottom: 18px;
+}
+
+.story-label {
+  margin: 0 0 10px;
+  display: inline-block;
+  color: var(--accent);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.story-card h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.story-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.story-items li {
+  padding: 18px 20px;
+  border-radius: 18px;
+  border: 1px solid rgba(96, 165, 250, 0.18);
+  background: rgba(96, 165, 250, 0.08);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.story-items li:hover {
+  transform: translateY(-1px);
+  background: rgba(96, 165, 250, 0.16);
+  border-color: rgba(96, 165, 250, 0.28);
+}
+
+.workspace-grid {
+  grid-template-columns: 1.05fr 1.45fr;
+  margin-bottom: 48px; /* ensure export panel sits below expanded chat */
+}
+
+.prompt-panel,
+.chat-panel,
+.export-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+.chat-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 720px; /* restore more balanced height */
+}
+
+.chat-wrapper {
+  flex: 1;
+  height: 640px;
+  overflow: visible;
+  position: relative;
+  border-radius: 20px;
+  background: var(--panel-soft);
+  padding: 16px; /* reduce inset so widget fills more space visually */
+  z-index: 0;
+}
+
+/* Place the langflow element to cover the inner area and allow its internal
+   elements to use absolute positioning relative to this container. */
+.chat-wrapper > langflow-chat {
+  display: block;
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  right: 12px;
+  bottom: 12px;
+  width: calc(100% - 24px);
+  height: calc(100% - 24px);
+  min-height: 560px;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: visible; /* allow internal elements room to position; inner window will scroll */
+  z-index: 20;
+}
+
+/* Ensure the chat's floating window becomes anchored to fill the host area.
+   Use specificity so these rules override the widget's inline styles. */
+.chat-wrapper > langflow-chat .cl-chat-window {
+  position: absolute !important; /* anchor the internal window to fill host */
+  left: 0 !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  transform: none !important;
+  margin: 0 !important;
+  overflow: auto !important; /* allow messages to scroll inside */
+}
+
+.chat-wrapper > langflow-chat .cl-window {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  max-height: 100% !important;
+  border-radius: 14px !important;
+}
+
+/* Ensure inner content scrolls inside the anchored window rather than overflowing */
+.chat-wrapper > langflow-chat .cl-chat-window .cl-inner,
+.chat-wrapper > langflow-chat .cl-chat-window .cl-content,
+.chat-wrapper > langflow-chat .cl-chat-window .cl-body {
+  max-height: 100% !important;
+  overflow: auto !important;
+}
+
+/* Keep input visible by anchoring it inside the anchored window */
+.chat-wrapper > langflow-chat .cl-input_container {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 12px !important;
+  z-index: 90 !important;
+}
+
+.chat-wrapper > langflow-chat .cl-input_container {
+  width: 100% !important;
+}
+
+/* Keep messages visible between header and input */
+.chat-wrapper > langflow-chat .cl-messages_container {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 72px !important; /* leave space for header */
+  bottom: 88px !important; /* leave space for input */
+  overflow: auto !important;
+  padding: 12px 16px !important;
+}
+
+/* Allow the input to sit at the bottom and remain visible */
+.chat-wrapper > langflow-chat .cl-input_container {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 8px !important; /* keep a small gap from wrapper edge */
+  padding: 10px 64px 10px 16px !important; /* account for send icon */
+  z-index: 80 !important;
+}
+
+/* Ensure the input is fully visible, readable and above other panels */
+
+.chat-wrapper > langflow-chat .cl-input_container {
+  bottom: 18px !important; /* move up more to ensure visible within wrapper */
+  padding: 10px 72px 10px 16px !important; /* leave room for send button */
+  box-sizing: border-box !important;
+  z-index: 60 !important;
+}
+
+.chat-wrapper > langflow-chat .cl-input-element,
+.chat-wrapper > langflow-chat input.cl-input-element {
+  width: 100% !important;
+  padding: 12px 16px !important;
+  background: transparent !important;
+  border: none !important;
+  color: var(--text) !important;
+  font-size: 16px !important;
+  line-height: 1.2 !important;
+  outline: none !important;
+}
+
+.chat-wrapper > langflow-chat .cl-input-element::placeholder,
+.chat-wrapper > langflow-chat input.cl-input-element::placeholder {
+  color: var(--muted) !important;
+  opacity: 1 !important;
+}
+
+.chat-wrapper > langflow-chat .cl-input_container button,
+.chat-wrapper > langflow-chat .cl-input_container .cl-send-icon,
+.chat-wrapper > langflow-chat .cl-input_container button svg {
+  position: absolute !important;
+  right: 12px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 65 !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Prevent the widget's rounded corners from clipping the input area */
+.chat-wrapper > langflow-chat .cl-window {
+  position: absolute !important;
+  inset: 0 !important;
+  padding-bottom: 48px !important;
+  overflow: visible !important;
+}
+
+/* Hide floating/close bubble and floating actions when embedded */
+.chat-wrapper > langflow-chat .cl-corner_action,
+.chat-wrapper > langflow-chat .cl-floating-action,
+.chat-wrapper > langflow-chat .cl-floatingBtn,
+.chat-wrapper > langflow-chat .cl-close-button,
+.chat-wrapper > langflow-chat button[aria-label="Close"] {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Make the inner chat card blend with host panel and remove strong white background */
+.chat-wrapper > langflow-chat .cl-card,
+.chat-wrapper > langflow-chat .cl-inner_card,
+.chat-wrapper > langflow-chat .cl-chat-card,
+.chat-wrapper > langflow-chat .cl-panel {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Ensure header uses full width and sits at top */
+.chat-wrapper > langflow-chat .cl-window .cl-header,
+.chat-wrapper > langflow-chat .cl-chat-window .cl-header {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 0 !important;
+  z-index: 70 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* If the widget injects an inner white content pane, make it match our panel soft tone */
+.chat-wrapper > langflow-chat .cl-messages_container,
+.chat-wrapper > langflow-chat .cl-content-pane,
+.chat-wrapper > langflow-chat .cl-messages {
+  background: transparent !important;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: baseline;
+  margin-bottom: 18px;
+}
+
+  overflow: hidden; /* inner window will scroll instead of overflowing */
+  margin: 0;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.85rem;
+}
+
+.chat-panel h2,
+.prompt-panel h2,
+.export-panel h2 {
+  margin: 0;
+  font-size: 1.35rem;
+  color: var(--text);
+  font-weight: 700;
+}
+  overflow: auto !important; /* allow messages to scroll inside */
+.panel-copy {
+  margin: 0 0 18px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+  height: 100% !important;
+  min-height: 100% !important;
+  max-height: 100% !important;
+  min-height: 160px;
+  border-radius: 20px;
+  border: 1px solid var(--surface-border);
+  background: var(--surface-overlay);
+  color: var(--text);
+  padding: 18px;
+  resize: vertical;
+}
+
+.button-primary,
+.button-secondary {
+  border: none;
+  border-radius: 999px;
+  padding: 14px 20px;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.button-primary {
+  background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+  color: #0f172a;
+}
+
+.button-secondary {
+  background: var(--control-bg);
+  color: var(--text);
+  border: 1px solid var(--surface-border);
+}
+
+.button-primary:hover,
+.button-secondary:hover {
+  transform: translateY(-1px);
+}
+
+.panel-actions,
+.panel-actions--export {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.export-status {
+  margin-top: 18px;
+  color: var(--muted);
+}
+
+.export-status.error {
+  color: #f87171;
+}
+
+@media (max-width: 1040px) {
+  .workspace-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 860px) {
+  .page-shell {
+    padding: 24px 18px 48px;
+  }
+
+  .page-header,
+  .story-grid,
+  .workspace-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .story-grid,
+  .workspace-grid {
+    gap: 18px;
+  }
+}
