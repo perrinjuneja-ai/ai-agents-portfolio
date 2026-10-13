@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Siri — Testcase Generator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="light">
+    <header class="topbar">
+      <div class="title">Siri — Testcase Generator</div>
+      <div class="controls">
+        <label class="theme-toggle">
+          <input id="themeSwitch" type="checkbox" />
+          <span>Dark</span>
+        </label>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="left">
+        <h2>Description</h2>
+        <p class="desc">A compact UI to generate testcases from user stories using the Langflow API.</p>
+
+        <h3>Sample User Stories</h3>
+        <ul class="samples">
+          <li><button class="sample-btn" data-sample="As a bank customer, I want to transfer funds to another account so that I can pay my bills.">Banking</button></li>
+          <li><button class="sample-btn" data-sample="As a finance analyst, I need to generate monthly reports to review performance.">Finance</button></li>
+          <li><button class="sample-btn" data-sample="As an insurance agent, I want to submit claims for customers quickly.">Insurance</button></li>
+        </ul>
+      </section>
+
+      <section class="right">
+        <div class="chat-header">Chat — <span class="bot-name">Siri</span></div>
+        <div id="chat" class="chat">
+          <div class="message bot welcome">Happy to help you in Testcase generation</div>
+        </div>
+
+        <div class="chat-input">
+          <input id="messageInput" placeholder="Am Siri here! type your message" />
+          <div class="buttons">
+            <button id="sendBtn">Send</button>
+            <button id="clearBtn">Clear</button>
+            <button id="copyBtn">Copy</button>
+            <button id="exportBtn">Export</button>
+          </div>
+        </div>
+
+        <div id="error" class="error" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <script src="config.example.js"></script>
+    <!-- Optional user config: create `config.js` (copy from config.example.js) to override defaults -->
+    <script src="config.js"></script>
+    <script src="parse.js"></script>
+    <script src="app.js"></script>
+    <script src="export.js"></script>
+  </body>
+</html>

@@ -1,53 +1,60 @@
 # AI Agents Portfolio
 
-> Production-inspired AI agents for software engineering & test automation — LLMs, RAG, tool calling, and multi-agent workflows built with TypeScript.
+> Practical AI projects for software engineering and test automation, spanning browser automation, LLM-powered test generation, Jira integrations, and retrieval-augmented generation.
 
-A hands-on collection of practical AI agents designed to solve real-world software engineering and testing problems.
+This portfolio documents my journey from test automation engineering to AI engineering. The projects explore how LLMs, APIs, browser tooling, and retrieval systems can support real software testing workflows.
 
-This repository documents my journey from **test automation engineering to AI engineering**, with a focus on building intelligent systems rather than simple LLM-based applications.
+## Projects
 
-## 🚀 What You'll Find
+| Project | Overview | Main technologies |
+| --- | --- | --- |
+| [AI Test Automation Browser Assistant](./projects/ai-test-automation-browser-assistant/ai-extension/) | Chrome side-panel extension that inspects the active page and generates test automation code. | Chrome Extension Manifest V3, JavaScript, Groq, OpenAI, Claude, Testleaf |
+| [AI Testcase Chat](./projects/ai-testcase-chat/) | Two Langflow-powered interfaces for turning user stories into test cases and exporting results. | HTML, CSS, JavaScript, Langflow |
+| [Jira User Story Agent](./projects/jira-user-story-agent/) | Full-stack app that imports Jira stories or accepts story details directly, generates test cases, and exports them. | React, TypeScript, Express, Jira REST API, Groq |
+| [RAG Mongo Integration](./projects/rag-mongo-integration/) | Ingests test-case and user-story spreadsheets and searches the resulting MongoDB knowledge base. | React, Express, MongoDB Atlas Search, Mistral, Groq, Hugging Face |
 
-* 🤖 AI Agents
-* 🧠 LLM-powered workflows
-* 🔎 Retrieval-Augmented Generation (RAG)
-* 🛠️ Tool calling and API integrations
-* 🔗 Multi-agent orchestration
-* 🧪 AI-powered test engineering
-* 🗄️ Vector search and knowledge retrieval
-* 💻 TypeScript-based AI applications
+## Project details
 
-## 📂 Projects
+### AI Test Automation Browser Assistant
 
-| Project                   | Description                                                         | Key Concepts                   |
-| ------------------------- | ------------------------------------------------------------------- | ------------------------------ |
-| Test Case Generator       | Generates structured test cases from user stories                   | LLM, Prompt Engineering        |
-| User Story Reviewer       | Identifies ambiguity, missing acceptance criteria and edge cases    | LLM, Structured Output         |
-| RAG Test Case Agent       | Retrieves relevant historical test cases before generating new ones | RAG, Embeddings, Vector Search |
-| Jira AI Agent             | Uses tools to interact with Jira workflows                          | Tool Calling, APIs             |
-| Multi-Agent Test Engineer | Coordinates specialized AI agents for software testing              | Multi-Agent Systems            |
+Located in [`projects/ai-test-automation-browser-assistant/ai-extension/`](./projects/ai-test-automation-browser-assistant/ai-extension/), this Manifest V3 Chrome extension provides a chat-based code generator in the browser side panel. It can inspect the active page, use that context to generate automation code, and switch between feature-file and page-class generation. Settings include Java, C#, Python, and TypeScript, browser automation frameworks (Selenium, Playwright, Cypress, and Puppeteer), and selectable LLM providers (Groq, OpenAI, Claude, and Testleaf).
 
-> Projects are added incrementally as the portfolio evolves.
+Load the `ai-extension` folder as an unpacked extension in Chrome. Configure provider credentials in the extension settings; do not commit API keys.
 
-## 🧰 Technology
+### AI Testcase Chat
 
-* TypeScript
-* Node.js
-* LangChain
-* LLMs
-* RAG
-* MongoDB / Vector Search
-* Groq
-* REST APIs
-* AI Agents
-* Prompt Engineering
+This project contains two browser-based implementations with sample stories for banking, finance, and insurance:
 
-## 🎯 Goal
+- [Version 1: external Langflow chat](./projects/ai-testcase-chat/version-1/external-chat-cdn/) embeds the Langflow chat widget. Choose or edit a sample story, copy the prompt into the chat, then paste the generated JSON into the export area to scan and download test cases as an Excel file.
+- [Version 2: custom chat interface](./projects/ai-testcase-chat/version-2/custom-implementation/) provides its own chat UI for the Langflow API. It parses generated test cases and supports copying and downloading the results in spreadsheet-friendly formats.
 
-The goal of this repository is to explore how **agentic AI can augment software engineering and test automation workflows**, combining my experience in automation engineering with modern AI technologies.
+Both implementations use local Langflow configuration. Version 2 includes [`config.example.js`](./projects/ai-testcase-chat/version-2/custom-implementation/config.example.js) as a starting point. Create local configuration as needed and keep credentials out of source control.
 
-## 👩‍💻 About
+### Jira User Story Agent
 
-I am a test automation engineer with 11+ years of experience in software testing and automation, currently expanding into **AI engineering, LLM applications, RAG and agentic AI systems**.
+Located in [`projects/jira-user-story-agent/`](./projects/jira-user-story-agent/), this TypeScript application combines a React frontend with an Express backend. Users can enter a story title, description, and acceptance criteria, or configure Jira access to select a story and populate the form. The backend generates structured test cases through the configured Groq-compatible API; results can be downloaded as JSON, CSV, or Excel-compatible files.
 
-This repository contains practical implementations of those concepts through progressively more sophisticated AI agents.
+From the project directory, install dependencies with `npm install` and start the frontend and backend with `npm run dev`. Backend and Jira credentials are supplied through environment variables; do not commit real credentials.
+
+### RAG Mongo Integration
+
+Located in [`projects/rag-mongo-integration/`](./projects/rag-mongo-integration/), this full-stack application imports test-case and user-story spreadsheets, converts them to JSON, creates embeddings, and indexes the content in MongoDB Atlas. Its React interface supports:
+
+- BM25 keyword search, vector search, and weighted hybrid search.
+- Optional reranking and query preprocessing.
+- Uploading source spreadsheets and starting embedding jobs with progress tracking.
+
+Mistral provides embeddings, with Groq and Hugging Face integrations available for reranking. The repository includes an [environment-variable template](./projects/rag-mongo-integration/.env.example); configure MongoDB Atlas indexes and credentials before using the ingestion and search features. Start the application from the project directory with `npm run dev`.
+
+## Technologies and themes
+
+- JavaScript and TypeScript; React and Node.js
+- LLM APIs and orchestration with Langflow, Groq, OpenAI, Mistral, Hugging Face, Claude, and Testleaf
+- Jira REST API integration
+- MongoDB Atlas Search, embeddings, and RAG
+- Browser test automation with Selenium, Playwright, Cypress, and Puppeteer
+- Prompt design and structured test-case generation
+
+## About
+
+I am a test automation engineer with 11+ years of experience in software testing and automation, expanding into AI engineering, LLM applications, RAG, and agentic AI systems. This portfolio captures practical experiments at the intersection of those fields.
